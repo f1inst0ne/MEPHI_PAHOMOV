@@ -17,6 +17,9 @@ int main(){
 	int a, p;
 	printf("Enter the number:");
 	scanf("%d", &a);
+	if (a < 0){
+		a *= -1;
+	}
 	p = sum(a);
 	printf("%d", p);
 	printf("\n");
