@@ -1,18 +1,21 @@
 #include<stdio.h>
 #include<math.h>
 
-int step(int n, float x){
-	float s = 1.0
-	while n > 0:
+
+int step(int n, double x){
+	double s = x;
+	for (int i = 1; i < n+1; i++){
 		s *= x;
+	}
 	return s;
 }
 
 
 
+
 int fact(int n){
 	int f = 1;
-	for (int i = 0, i += 1, i != n){
+	for (int i = 1; i < n+1; i++){
 		f *= i;
 	}
 	return f;
@@ -20,23 +23,23 @@ int fact(int n){
 
 
 
-int ex(int n, float x){
-	return 0
-}
-
-
-
 
 
 int main(){
-	float ans = 0.0;
-	float x = 0.0;
 	int n = 0;
-	printf("Enter n:");
+	double x = 0;
+	double ans = 0;
 	scanf("%d", &n);
-	printf("Enter x:");
-	scanf("%f", &x);
-	printf("%f", step(x, n));
-	printf("%d", fact(n));
+	scanf("%lf", &x);
+	int f = fact(n);
+	double s = step(n, x);
+	for (int i = n; i != 1; i -= 1){
+		ans += (s/f);
+		s /= n;
+		f /= x;
+
+	}
+	print("True answer:%.3lf", math.exp())
+	printf("Your nubmer:%.3lf \n", ans);
 	return 0;
 }
