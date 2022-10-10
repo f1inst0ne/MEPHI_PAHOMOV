@@ -10,13 +10,13 @@ int main(){
 	long double x = 0;
 	long double n = 0;
 	long double pi = 3.14159265359;
-	printf("Enter the angle(x):");
+	printf("Введите угол(x):");
 	scanf("%Lf", &x);
-	printf("Enter the accurancy(n):");
+	printf("Введите точность(n):");
 	scanf("%Lf", &n);
 	long double n_sin = new_sin(x, n);
 	long double t_sin = sin(x);
-	printf("\n---------------------------------\nYour sin: %.10Lf\nTrue sin: %.10Lf\n", n_sin, t_sin);	
+	printf("\n---------------------------------\nВаш синус: %.10Lf\nПравильный синус: %.10Lf\n", n_sin, t_sin);	
 	
 	return 0;
 }
