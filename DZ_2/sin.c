@@ -1,70 +1,48 @@
 #include<stdio.h>
 #include<math.h>
 
-long double new_sin(long double, int);
-long double step(long double, int);
-int fact(int);
-int minus(int);
+
+long double new_sin(long double, long double);
+long double m(long double);
 
 
 int main(){
 	long double x = 0;
-	int n = 0;
-	printf("Enter x:");
+	long double n = 0;
+	long double pi = 3.14159265359;
+	printf("Enter the angle(x):");
 	scanf("%Lf", &x);
-	printf("Enter n:");
-	scanf("%d", &n);
-	while (x > 360){
-		x -= 360;
-	}
-	long double t_sin = sinl(x);
+	printf("Enter the accurancy(n):");
+	scanf("%Lf", &n);
 	long double n_sin = new_sin(x, n);
-	printf("\nTrue sin:%.10Lf\n", t_sin);
-	printf("Your sin:%.10Lf\n", n_sin);
+	long double t_sin = sin(x);
+	printf("\n---------------------------------\nYour sin: %.10Lf\nTrue sin: %.10Lf\n", n_sin, t_sin);	
+	
 	return 0;
 }
 
 
-/* --------------------------------------------- */
-long double new_sin(long double x, int n){
+long double new_sin(long double x, long double n){
 	long double s = 0;
-	long double chis = minus(n-1) * step(x, 2*n - 1);
-	int znam = fact(2*n - 1);
-	printf("----- s = %Lf, chis = %Lf, znam = %d, x = %Lf, n = %d\n", s, chis, znam, x, n);
-	while (n > 0){
-		s += chis / znam;
-		chis = chis / (x * x);
-		znam = znam / (n*(n-1));
-		n -= 2;
-	        printf("----- s = %Lf, chis = %Lf, znam = %d, x = %Lf, n = %d\n", s, chis, znam, x, n);
+	long double p = x;
+	int z = 1;
+	printf("\n-----s = %.10Lf, p = %.10Lf, z = %d\n", s, p, z);
+	while (m(p) > n){
+		s += p;
+		p *= -1 * x*x / (z+1)/(z + 2);
+		z += 2;
+		
+		printf("-----s = %.10Lf, p = %.10Lf, z = %d\n", s, p, z);
 
 	}
 	return s;
 }
 
-
-long double step(long double x, int n){
-	long double s = 1;
-	for (int i = 1; i < n+1; i++){
-		s *= x;
+long double m(long double x){
+	if (x >= 0){
+		return x;
 	}
-	return s;
-}
-
-
-int fact(int n){
-	int f = 1;
-	for (int i = 1; i < n+1; i++){
-		f *= i;
+	else{
+		return -x;
 	}
-	return f;
-}
-
-
-int minus(int n){
-	int m = 1;
-	for (int i = 1; i < n+1; i++){
-		m *= -1;
-	}
-	return m;
 }
