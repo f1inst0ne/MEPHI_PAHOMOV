@@ -3,7 +3,7 @@
 #include<math.h>
 
 long double func(long double);
-
+long double m(long double);
 
 int main(){
 	long double n = 0;
@@ -16,5 +16,25 @@ int main(){
 }
 
 long double func(long double n){
-	return 1231231;
+	long double p = 1;
+	int s = -1;
+	long double i = 1;
+	printf("$ p = %.10Lf, s = %d, i = %Lf\n");
+	while (m(p)>n){
+		p = p * (1+(s/(2*i + 1)));
+		s = -s;
+		i += 1;
+		printf("$ p = %.10Lf, s = %d, i = %Lf\n");
+	}
+	return p;
 }
+long double m(long double x){
+	if (x >= 0){
+		return x;
+	}
+	else{
+		return -x;
+	}
+}
+
+
