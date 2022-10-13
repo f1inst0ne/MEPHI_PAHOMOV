@@ -4,10 +4,12 @@
 
 long double func(long double);
 long double m(long double);
+long double check(long double);
+
 
 int main(){
 	long double n = 0;
-	printf("\n\nВведите точность:");
+	printf("Введите точность:");
 	scanf("%Lf", &n);
 	long double ans = func(n);
 	long double t_ans = sqrt(2)/2;
@@ -19,22 +21,15 @@ long double func(long double n){
 	long double p = 1;
 	int s = -1;
 	long double i = 1;
-	printf("$ p = %.10Lf, s = %d, i = %Lf\n");
-	while (m(p)>n){
-		p = p * (1+(s/(2*i + 1)));
-		s = -s;
-		i += 1;
-		printf("$ p = %.10Lf, s = %d, i = %Lf\n");
+	while (1+(s/(2*i + 1))>n){
+		if ((p * (1+(s/(2*i + 1)))- p) < n/10 && (p * (1+(s/(2*i + 1)))- p) > 0){	
+			break;
+		}
+		else{
+			p = p * (1+(s/(2*i + 1)));
+			s = -s;
+			i += 1;
+		}
 	}
 	return p;
 }
-long double m(long double x){
-	if (x >= 0){
-		return x;
-	}
-	else{
-		return -x;
-	}
-}
-
-
