@@ -11,6 +11,10 @@ int main(){
 	long double n = 0;
 	printf("Введите точность:");
 	scanf("%Lf", &n);
+	if (n <= 0){
+		printf("Ошибка!!!!!! Введено не подходящее значение...");
+		return 1;
+	}
 	long double ans = func(n);
 	long double t_ans = sqrt(2)/2;
 	printf("--------------------\nМой ответ:%.10Lf\nПравильный ответ:%.10Lf\n\n\n", ans, t_ans);
@@ -22,7 +26,7 @@ long double func(long double n){
 	int s = -1;
 	long double i = 1;
 	while (1+(s/(2*i + 1))>n){
-		if ((p * (1+(s/(2*i + 1)))- p) < n/10 && (p * (1+(s/(2*i + 1)))- p) > 0){	
+		if ((p * (1+(s/(2*i + 1)))- p) < n && (p * (1+(s/(2*i + 1)))- p) > 0){	
 			break;
 		}
 		else{

@@ -10,6 +10,10 @@ int main(){
 	int n = 0;/*Кол-во членов*/
 	printf("\n\nВведите кол-во членов:");
 	scanf("%d", &n);
+	if (n <= 0){
+		printf("Ошибка!!!! Введено не подходящее значение");
+		return 1;
+	}
 	long double ans = func(n);
 	printf("Мой ответ:%.10Lf\n", ans);
 	printf("Правильный ответ:%.10Lf\n\n\n", x);
