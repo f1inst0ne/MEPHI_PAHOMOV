@@ -3,8 +3,6 @@
 #include<math.h>
 
 long double func(long double);
-long double m(long double);
-long double check(long double);
 
 
 int main(){
@@ -25,15 +23,10 @@ long double func(long double n){
 	long double p = 1;
 	int s = -1;
 	long double i = 1;
-	while (1+(s/(2*i + 1))>n){
-		if ((p * (1+(s/(2*i + 1)))- p) < n && (p * (1+(s/(2*i + 1)))- p) > 0){	
-			break;
-		}
-		else{
+	while (((p * (1+(s/(2*i + 1)))- p) > n || (p * (1+(s/(2*i + 1)))- p) < 0)){
 			p = p * (1+(s/(2*i + 1)));
 			s = -s;
 			i += 1;
-		}
 	}
 	return p;
 }
