@@ -32,8 +32,15 @@ void print_array(int len, int *array){
 	}
 	printf("]\n");
 }
+int *add_to_end(int *array, int len){
+	int new = 0;
+	printf("Введите новый элемент:\n>");
+	scanf("%d", &new);
+	array[len-1] = new;
+	return array;
+}
 
-/* ДОДЕЛАТЬ */
+
 int *add_by_index(int *array, int len ){
 	int new = 0;
 	int index = 0;
@@ -45,14 +52,13 @@ int *add_by_index(int *array, int len ){
 	if (index >= len){
 		index = len-1;
 	}
-	for (int i = 0; i < len; i++){
-		if (i == index){
-		new_array[i] = new;
-		}
-		else{
-		new_array[i] = array[i];
-		}
+	for (int i = len; i > index; i = i - 1){
+		new_array[i] = array[i-1];
 	}
+	for (int i = 0; i < index; i++){
+		new_array[i] = array[i];
+	}
+	new_array[index] = new;
 	return new_array;
 
 }
@@ -62,15 +68,3 @@ int del_by_index(){
 	return 4444;
 }
 
-/*Недоработанная функция */
-/*
-int *refill_array(int *array){
-	int len = sizeof(array)/sizeof(int), a;
-	printf("%d", len);
-	for (int i = 0; i < len; i ++){
-		printf(">");
-		scanf("%d", &a);
-		array[i] = a;
-	}
-	return array;
-}*/

@@ -25,6 +25,9 @@ int main(){
 			array = fill_array(len, array);
 		}
 		if (user_input == 3){
+			len += 1;
+			array = realloc(array, len*sizeof(int));
+			array = add_to_end(array, len);
 		}
 		if (user_input == 4){
 			len += 1;
