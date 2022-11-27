@@ -35,7 +35,9 @@ int main(){
 			array = add_by_index(array, len);
 		}
 		if (user_input == 5){
-			/**/
+			array  = del_by_index(array, len);
+			len -= 1;
+			array = realloc(array, len*sizeof(int));
 		}
 		if (user_input == 6){
 			/**/

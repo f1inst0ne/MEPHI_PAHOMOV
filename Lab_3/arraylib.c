@@ -64,7 +64,18 @@ int *add_by_index(int *array, int len ){
 }
 
 /* ДОДЕЛАТЬ */
-int del_by_index(){
-	return 4444;
+int *del_by_index(int *array, int len){
+	int index = 0;
+	printf("Введите индекс:\n>");
+	scanf("%d", &index);
+	int *new_array = malloc(len*sizeof(int));
+	for (int i = 0; i < index; i++){
+		new_array[i] = array[i];
+	}
+	for (int i = index; i < len-1; ++i){
+		new_array[i] = array[i+1];
+	}
+	print_array(len, new_array);
+	return new_array;
 }
 
