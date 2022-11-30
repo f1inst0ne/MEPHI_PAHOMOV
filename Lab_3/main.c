@@ -17,12 +17,14 @@ int main(){
 		/* -----------------------------*/
 		int user_input = menu_check();
 		if (user_input == 1){
+			if (sizeof(array) != 0){
+				free(array);
+			}
 			printf("Введите длину нового массива:");
 			scanf("%d", &len); 
 			array = init_array(len);
 		}
 		if (user_input == 2){
-			array = fill_array(len, array);
 		}
 		if (user_input == 3){
 			len += 1;

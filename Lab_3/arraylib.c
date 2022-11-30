@@ -5,19 +5,15 @@
 /*Инициализация массива. Создает массив длиной len. */
 int *init_array(int len){
 	int* new_array = malloc(len * sizeof(int));
-	return new_array;
-}
-
-int *fill_array(int len, int *array){
 	int a = 0;
 	printf("Введите значения, по одному в строке:\n");
 	for (int i = 0; i < len; i ++){
 		printf(">");
 		scanf("%d", &a);
-		array[i] = a;
+		new_array[i] = a;
 
 	}
-	return array;
+	return new_array;
 }
 
 void print_array(int len, int *array){
