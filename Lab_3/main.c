@@ -11,7 +11,7 @@ int main(){
 	int *array = malloc(sizeof(int));
 	while (1){
 		system("clear");
-		printf("\nВыберете действие:\n1)Инициализировать новый массив и заполнить его\n2)Добавить элемент в конец\n3)Добавить элемент по индексу\n4)Удалить элемент по индексу\n5)Обработать массив по индивидуальному заданию\n6)Написать условие индивидуалного задания\n7)Выход\n\nСостояние массива на данный момент:\n");
+		printf("\nВыберете действие:\n1)Инициализировать новый массив и заполнить его\n2)Добавить элемент в конец\n3)Добавить элемент по индексу\n4)Удалить элемент по индексу\n5)Обработать массив по индивидуальному заданию\n6)Выход\n\nСостояние массива на данный момент:\n");
 		print_array(len, array);
 		printf("-----------------------------\n");
 		/* -----------------------------*/
@@ -28,39 +28,28 @@ int main(){
 			array = add_to_end(array, len);
 		}
 		if (user_input == 3){
-			len += 1;
-			array = realloc(array, len*sizeof(int));
-			array = add_by_index(array, len);
+			add_by_index(&array, &len);
 		}
 		if (user_input == 4){
-			len -= 1;
-			int *buf = malloc(len * sizeof(int));
-			buf  = del_by_index(array, len);
-			free(array);
-			array = malloc(len * sizeof(int));
-			array = copy_array(buf, len);
-			free(buf);
+			int index = 0;
+			printf("Введите индекс:");
+			scanf("%d", &index);
+			del_by_index(&array, &len, index);
 		}
 		if (user_input == 5){
 			task(array, len);
 		}
 		if (user_input == 6){
-			write_task();
-		}
-		if (user_input == 7){
-			if (len > 0){
-				free(array);
-			}
+			free(array);
 			return 0;
 		}
-		if ((user_input > 7) || (user_input <= 0)){
+		if ((user_input >= 7) || (user_input <= 0)){
 			system("clear");
 			printf("Неизвестная команда!!!!! Попробуйте снова!!!\n\nВведите любое число для проболжения...\n");
 			int exit_input = 0;
 			scanf("%d", &exit_input);
 		}
 	}
-	
 }
 
 int menu_check(){

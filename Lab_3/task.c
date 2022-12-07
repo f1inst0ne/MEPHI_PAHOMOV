@@ -6,7 +6,9 @@ int schet(int);
 int check(int, int);
 
 
-void task(int *array, int len){
+void task(int *array_to_work, int len){
+	int *array;
+	array = copy_array(array_to_work, len);
 	system("clear");
 	int *new_array = malloc(sizeof(int));
 	int new_len = 0;
@@ -18,18 +20,14 @@ void task(int *array, int len){
 				new_len += 1;
 				new_array = realloc(new_array, new_len*sizeof(int));
 				new_array[new_len-1] = array[j];
-				array = del_by_known_index(array, len, j);
-				len -= 1;
-				array = realloc(array, len * sizeof(int));
+				del_by_index(&array, &len, j);
 			}
 		}
 		if (found){
 			new_len += 1;
 			new_array = realloc(new_array, len*sizeof(int));
 			new_array[new_len-1] = array[i];
-			array = del_by_known_index(array, len, i);
-			len -= 1;
-			array = realloc(array, len * sizeof(int));
+			del_by_index(&array, &len, i);
 			}
 
 		}
@@ -42,18 +40,13 @@ void task(int *array, int len){
 	
 	print_array(new_len, new_array);
 	print_array(len, array);
+	free(array);
+	free(new_array);
 	int exit_input = 0;
 	printf("Введите любое число, чтобы продолжить...\n");
 	scanf("%d", &exit_input);
 }
 
-void write_task(){
-	system("clear");
-	int exit_input;
-	printf("Индивидуальное задание\nВ исходной последовательности целых чисел найти те, которые состоят из одинаковых цифр. Сформировать из данных чисел новую последовательность, удалив их из исходной.\n\nВведите любое число, чтобы продолжить...\n");
-	scanf("%d", &exit_input);
-
-}
 
 int check(int num1, int num2){
 	int result = 1;
