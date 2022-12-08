@@ -19,7 +19,7 @@ int main(){
 		if (user_input == 1){
 			free(array);
 			printf("Введите длину нового массива:");
-			scanf("%d", &len); 
+			scanf("%d", &len);
 			array = init_array(len);
 		}
 		if (user_input == 2){
