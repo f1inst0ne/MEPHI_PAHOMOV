@@ -9,7 +9,8 @@ int main(){
 	system("clear");
 	int len = 0;
 	int *array = malloc(sizeof(int));
-	while (1){
+	int flag = 1;
+	while (flag){
 		system("clear");
 		printf("\nВыберете действие:\n1)Инициализировать новый массив и заполнить его\n2)Добавить элемент в конец\n3)Добавить элемент по индексу\n4)Удалить элемент по индексу\n5)Обработать массив по индивидуальному заданию\n6)Выход\n\nСостояние массива на данный момент:\n");
 		print_array(len, array);
@@ -41,7 +42,7 @@ int main(){
 		}
 		if (user_input == 6){
 			free(array);
-			return 0;
+			flag = 0;
 		}
 		if ((user_input >= 7) || (user_input <= 0)){
 			system("clear");
