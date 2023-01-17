@@ -5,11 +5,15 @@
 #include"lib.h"
 
 int main(){
+	system("clear");
 	char *string;
+	printf("Вводите строки и получайте результат.\nДля прекращения программы нажмите сочетание клавиш CTRL+d\n");
 	while (1){
+		printf(">>>");
 		string = input();
 		if (string == NULL){
 			free(string);
+			printf("\nЗавершаю...\n");
 			break;
 		}
 		task(string);
