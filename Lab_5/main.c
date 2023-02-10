@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
+#include<time.h>
 #include"lib.h"
 
 
@@ -103,23 +104,21 @@ int main(int argc, char *argv[])
 
 	}
 
-
+	clock_t start, end;
+	start = clock();
 
 	if (strcmp(alg, "odd") == 0)
 	{
-		printf("ODD\n");
 		odd_even_sort(array, len, pole, nap, output_name);
 
 	}
 	else if(strcmp(alg, "selection") == 0)
 	{
-		printf("SELECTION\n");
 		selection_sort(array, len, pole, nap, output_name);
 
 	}
 	else if(strcmp(alg, "quick") == 0)
 	{
-		printf("QUICK\n");
 		quick_sort(array, len, pole, nap, output_name);
 
 	}
@@ -127,7 +126,11 @@ int main(int argc, char *argv[])
 	{
 		printf("Произошла неведомая херня. Не знаю как я запустилась, но ошибка есть!!!\n");
 	}
+	end = clock();
 
+	double total = (double) (end-start) / CLOCKS_PER_SEC;
+
+	printf("Time: %fs\n", total);
 
 
 
