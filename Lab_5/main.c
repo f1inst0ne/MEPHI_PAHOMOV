@@ -1,67 +1,151 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<time.h>
+#include<unistd.h>
+#include"lib.h"
+
 
 int main(int argc, char *argv[])
-{
-
-	//--help
-	if (argc > 1)
+{	
+	//Проверка корректности ввода
+	
+	
+	if ((argc == 1) || ((argc != 11) && !(strcmp(argv[1], "-h") == 0)))
 	{
-		if (strcmp(argv[1], "--help") == 0)
+		printf("--------------------------\nError!!!\nFor help restart with\n\n./test -h\n--------------------------\n");
+		return 0;
+	}
+
+
+	//Обрабатывем аргументы командной строки
+	int arg = 0;
+	char *alg;
+	char *pole;
+	char *nap;
+	char *input_name;
+	char *output_name;
+
+	while ((arg = getopt(argc, argv, "ha:p:n:f:o:")) != -1)
+	{
+		switch(arg)
 		{
-			char line[255];
-			FILE *file = fopen("help.txt", "r");
-
-			if (file == NULL)
-			{
-				printf("Ошибка!!!\nФайла со справкой нет в директоркии!!!\n");
+			case 'h':
+				print_help();
 				return 0;
-			}
-			while(fgets(line, 255, file) != NULL)
-			{
-			printf("%s", line);
-			}
-
-			fclose(file);
-
-			return 0;
+			case 'a': 
+				alg = (char*)calloc(strlen(optarg)+1, sizeof(char));
+				strcpy(alg, optarg);
+				break;
+			case 'p':
+				pole = (char*)calloc(strlen(optarg)+1, sizeof(char));
+				strcpy(pole, optarg);
+				break;
+			case 'n':
+				nap = (char*)calloc(strlen(optarg)+1, sizeof(char));
+				strcpy(nap, optarg);
+				break;
+			case 'f':
+				input_name = (char*)calloc(strlen(optarg)+1, sizeof(char)); 
+				strcpy(input_name, optarg);
+				break;
+			case 'o':
+				output_name = (char*)calloc(strlen(optarg)+1, sizeof(char)); 
+				strcpy(output_name, optarg);
+				break;
+			case '?': printf("--------------------------\nError!!!\nFor help restart with\n\n./test -h\n--------------------------\n"); return 0;
 		}
 	}
 
-	//Проверка на кол-во аргументов
-	if (argc > 6){
-		printf("Слишком много аргументов.\n\nДля справки перезапустите с флагом --help\n");
-		return 0;
-	}
-	if ((argc < 5) && (argc == 1))
+
+	if (flags_check(alg, pole, nap) == 0)
 	{
-		printf("Слишком мало аргументов.\n\nДля справки перезапустите с флагом --help\n");
+		printf("--------------------------\nError!!!\nFor help restart with\n\n./test -h\n--------------------------\n"); 
 		return 0;
+
 	}
 
-	time_t timer1 = time(NULL);  //Начальный таймер 
-	/*--------------------------------------------------*/
 
+	
+	//Открывем входной файл
+	FILE *input = fopen(input_name, "r");
 
-	FILE *file = fopen(argv[1], "r");//Открываем файл
+	if (!input)
+	{
+		printf("--------------------------\nError!!!\nФайла на вход НЕ СУЩЕСТВУЕТ!!!\n\n--------------------------\n");
+		return 0;
+	}
+	
+
+	//Создаем массив структур
+	int len = 0;
+	node *array = (node*)calloc(1, sizeof(node));
+
 	char line[255];
-	while (fgest(line, 255, file) != NULL)
+	char *word;
+	while(fgets(line, 255, input) != NULL)
 	{
-		printf("%s", line);
+		len++;
+		array = (node*)realloc(array, len*sizeof(node));
+
+		word = strtok(line, ",");
+		(array[len-1]).name = (char*)malloc((strlen(word) + 1) * sizeof(char));
+		memcpy((array[len-1]).name, word, (strlen(word) + 1) * sizeof(char));
+		
+		word = strtok(NULL, ",");
+		/*strcpy((array[len-1]).num, word);*/
+		(array[len-1]).num = (char*)malloc((strlen(word) + 1) * sizeof(char));
+		memcpy((array[len-1]).num, word, (strlen(word) + 1) * sizeof(char));
+		
+
+		word = strtok(NULL, ",");
+		(array[len-1]).age = atoi(word);
+
+
 	}
 
 
 
-	fclose(file); //Закрываем файл
+	if (strcmp(alg, "odd") == 0)
+	{
+		printf("ODD\n");
+		odd_even_sort(array, len, pole, nap, output_name);
 
-	/*--------------------------------------------------*/
-	time_t timer2 = time(NULL); //Конечный таймер
+	}
+	else if(strcmp(alg, "selection") == 0)
+	{
+		printf("SELECTION\n");
+		selection_sort(array, len, pole, nap, output_name);
 
-	printf("%f\n", difftime(timer2, timer1));
+	}
+	else if(strcmp(alg, "quick") == 0)
+	{
+		printf("QUICK\n");
+		quick_sort(array, len, pole, nap, output_name);
+
+	}
+	else
+	{
+		printf("Произошла неведомая херня. Не знаю как я запустилась, но ошибка есть!!!\n");
+	}
 
 
 
+
+
+	//Отчистка памяти,дабы всеми любимый валгринд не ныл
+
+	for (int i = 0; i < len; i++)
+	{
+		free((array[i]).name);
+		free((array[i]).num);
+	}
+
+	free(array);
+	fclose(input);
+	free(alg); 
+	free(pole); 
+	free(nap); 
+	free(input_name); 
+	free(output_name);
 	return 0;
 }
