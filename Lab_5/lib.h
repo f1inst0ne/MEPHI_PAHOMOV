@@ -5,8 +5,9 @@
 typedef struct node
 {
 	int age;
+	char num[9];
 	char *name;
-	char *num;
+	
 
 	
 }node;

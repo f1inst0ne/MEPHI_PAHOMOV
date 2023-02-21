@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 		
 		word = strtok(NULL, ",");
 		/*strcpy((array[len-1]).num, word);*/
-		(array[len-1]).num = (char*)malloc((strlen(word) + 1) * sizeof(char));
+		//(array[len-1]).num = (char*)malloc((strlen(word) + 1) * sizeof(char));
 		memcpy((array[len-1]).num, word, (strlen(word) + 1) * sizeof(char));
 		
 
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < len; i++)
 	{
 		free((array[i]).name);
-		free((array[i]).num);
+		//free((array[i]).num);
 	}
 
 	free(array);
